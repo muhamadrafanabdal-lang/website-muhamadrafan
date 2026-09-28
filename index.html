@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Website pembelajaran kabel UTP dan jaringan komputer">
+
+<title>UTP LAB | Computer Networking</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background:
+        radial-gradient(circle at 15% 5%, rgba(35,140,255,.14), transparent 30%),
+        radial-gradient(circle at 90% 40%, rgba(0,190,255,.10), transparent 30%),
+        #07111f;
+    color: #eef6ff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .22;
+}
+
+.orb1 {
+    width: 300px;
+    height: 300px;
+    background: #087cff;
+    top: 5%;
+    left: -100px;
+}
+
+.orb2 {
+    width: 250px;
+    height: 250px;
+    background: #00c2ff;
+    right: -100px;
+    top: 40%;
+}
+
+.orb3 {
+    width: 300px;
+    height: 300px;
+    background: #164fff;
+    left: 40%;
+    bottom: -180px;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+    --blue: #36a9ff;
+    --blue-dark: #1677ff;
+    --text: #eef6ff;
+    --muted: #98aabd;
+
+    --glass:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.035)
+        );
+
+    --border: rgba(255,255,255,.13);
+
+    --shadow:
+        0 20px 60px rgba(0,0,0,.25);
+
+    --radius: 24px;
+}
+
+
+/* =====================================================
+   GLASS
+===================================================== */
+
+.glass {
+    background: var(--glass);
+    border: 1px solid var(--border);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: var(--shadow);
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 999;
+
+    background: rgba(7,17,31,.65);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.nav-container {
+    width: min(1180px,92%);
+    min-height: 74px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--blue-dark)
+        );
+
+    box-shadow:
+        0 8px 25px rgba(20,130,255,.35);
+}
+
+.accent {
+    color: var(--blue);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 13px;
+
+    transition: .25s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+
+    border: 0;
+    background: transparent;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section {
+    width: min(1180px,92%);
+
+    margin: auto;
+
+    padding: 110px 0;
+}
+
+.section-heading {
+    max-width: 680px;
+
+    margin-bottom: 48px;
+}
+
+.section-heading span {
+    color: var(--blue);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    font-size: clamp(30px,5vw,48px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin: 12px 0 17px;
+}
+
+.section-heading p {
+    color: var(--muted);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 1.1fr .9fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+    padding-top: 145px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    border-radius: 100px;
+
+    color: #a8dfff;
+
+    background: rgba(54,169,255,.08);
+
+    border: 1px solid rgba(54,169,255,.2);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.pulse {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #42c5ff;
+
+    box-shadow: 0 0 15px #42c5ff;
+}
+
+.hero h1 {
+    font-size: clamp(45px,7vw,78px);
+
+    line-height: .98;
+
+    letter-spacing: -4px;
+
+    margin: 25px 0;
+}
+
+.hero h1 span {
+    display: block;
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #36a9ff,
+            #80d8ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero p {
+    max-width: 650px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 32px;
+}
+
+.btn {
+    padding: 13px 19px;
+
+    border-radius: 13px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.primary {
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--blue-dark)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(30,130,255,.25);
+}
+
+.secondary {
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid var(--border);
+}
+
+.hero-stats {
+    display: flex;
+
+    gap: 40px;
+
+    margin-top: 55px;
+}
+
+.hero-stats div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stats strong {
+    font-size: 24px;
+}
+
+.hero-stats span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   HERO NETWORK
+===================================================== */
+
+.hero-card {
+    min-height: 460px;
+
+    border-radius: 35px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+}
+
+.network {
+    position: relative;
+
+    width: 330px;
+    height: 330px;
+}
+
+.network-center {
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    top: 100px;
+    left: 100px;
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    align-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(54,169,255,.2),
+            rgba(54,169,255,.02)
+        );
+
+    border: 1px solid rgba(54,169,255,.4);
+
+    box-shadow:
+        0 0 70px rgba(54,169,255,.2);
+}
+
+.network-center strong {
+    font-size: 25px;
+}
+
+.network-center small {
+    font-size: 9px;
+
+    color: var(--muted);
+
+    letter-spacing: 2px;
+}
+
+.node {
+    position: absolute;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    z-index: 2;
+}
+
+.node1 {
+    top: 20px;
+    left: 120px;
+}
+
+.node2 {
+    bottom: 25px;
+    left: 30px;
+}
+
+.node3 {
+    bottom: 25px;
+    right: 30px;
+}
+
+.line {
+    position: absolute;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--blue),
+            transparent
+        );
+
+    opacity: .7;
+
+    transform-origin: left center;
+}
+
+.line1 {
+    width: 100px;
+    top: 90px;
+    left: 130px;
+    transform: rotate(90deg);
+}
+
+.line2 {
+    width: 130px;
+    top: 205px;
+    left: 100px;
+    transform: rotate(145deg);
+}
+
+.line3 {
+    width: 130px;
+    top: 205px;
+    left: 130px;
+    transform: rotate(35deg);
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 16px;
+}
+
+.info-card {
+    position: relative;
+
+    min-height: 300px;
+
+    padding: 28px;
+
+    border-radius: var(--radius);
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(54,169,255,.3);
+}
+
+.card-number {
+    position: absolute;
+
+    right: 20px;
+    top: 20px;
+
+    color: rgba(255,255,255,.15);
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.icon {
+    font-size: 30px;
+
+    margin: 35px 0 20px;
+}
+
+.info-card h3 {
+    font-size: 19px;
+
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   WIRE
+===================================================== */
+
+.wire-layout {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.wire-card {
+    padding: 28px;
+
+    border-radius: var(--radius);
+}
+
+.wire-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.wire-header span {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.wire-header h3 {
+    font-size: 27px;
+}
+
+.tag {
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background: rgba(54,169,255,.1);
+
+    color: var(--blue);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.wire-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.wire-row {
+    display: grid;
+
+    grid-template-columns:
+        30px 1fr 1fr;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.035);
+}
+
+.wire-row b {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.wire-row strong {
+    font-size: 12px;
+}
+
+.wire {
+    height: 12px;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+
+/* COLORS */
+
+.orange-white {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0 5px,
+            #ff8b22 5px 10px
+        );
+}
+
+.orange {
+    background: #ff8b22;
+}
+
+.green-white {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0 5px,
+            #43bd67 5px 10px
+        );
+}
+
+.green {
+    background: #43bd67;
+}
+
+.blue-white {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0 5px,
+            #388dff 5px 10px
+        );
+}
+
+.blue {
+    background: #388dff;
+}
+
+.brown-white {
+    background:
+        repeating-linear-gradient(
+            90deg,
+            white 0 5px,
+            #9b633e 5px 10px
+        );
+}
+
+.brown {
+    background: #9b633e;
+}
+
+
+/* =====================================================
+   TIP
+===================================================== */
+
+.tip {
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 20px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+}
+
+.tip-icon {
+    font-size: 25px;
+}
+
+.tip strong {
+    font-size: 14px;
+}
+
+.tip p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+    display: grid;
+
+    gap: 14px;
+}
+
+.timeline-item {
+    display: grid;
+
+    grid-template-columns:
+        60px 1fr;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    transition: .25s;
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+}
+
+.step {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(54,169,255,.2),
+            rgba(22,119,255,.06)
+        );
+
+    border: 1px solid rgba(54,169,255,.2);
+
+    color: var(--blue);
+
+    font-weight: 800;
+}
+
+.timeline-item h3 {
+    font-size: 16px;
+}
+
+.timeline-item p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* =====================================================
+   MEDIA
+===================================================== */
+
+.media-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 16px;
+}
+
+.media-card {
+    display: flex;
+
+    gap: 18px;
+
+    min-height: 260px;
+
+    padding: 24px;
+
+    border-radius: var(--radius);
+
+    transition: .3s;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+}
+
+.media-icon {
+    min-width: 50px;
+    height: 50px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.ppt {
+    background: rgba(255,130,60,.12);
+    color: #ff9d65;
+}
+
+.video {
+    background: rgba(255,70,90,.12);
+    color: #ff7584;
+}
+
+.media-content span {
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+}
+
+.media-content h3 {
+    font-size: 17px;
+
+    margin: 7px 0;
+}
+
+.media-content p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-bottom: 18px;
+}
+
+.media-button {
+    display: inline-block;
+
+    padding: 9px 12px;
+
+    border-radius: 9px;
+
+    background: rgba(54,169,255,.1);
+
+    border: 1px solid rgba(54,169,255,.15);
+
+    color: #8ed5ff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.preview {
+    display: block;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.upload-info {
+    margin-top: 18px;
+
+    padding: 18px 22px;
+
+    border-radius: 16px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+.profile-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    padding: 24px;
+
+    border-radius: var(--radius);
+}
+
+.profile-photo {
+    width: 125px;
+    height: 125px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+.profile-info > span {
+    color: var(--blue);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    font-weight: 800;
+}
+
+.profile-info h3 {
+    font-size: 19px;
+
+    margin: 7px 0 12px;
+}
+
+.profile-info p {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 4px;
+}
+
+.profile-info b {
+    color: #dbeaff;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 55px 0 25px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+}
+
+.footer-content {
+    width: min(1180px,92%);
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.footer-content p {
+    max-width: 350px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 12px;
+}
+
+.footer-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.copyright {
+    width: min(1180px,92%);
+
+    margin: 40px auto 0;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    color: #66758a;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   SCROLL ANIMATION
+===================================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(18px);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        padding-top: 130px;
+    }
+
+    .hero-card {
+        min-height: 380px;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .media-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:760px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+
+        top: 74px;
+        left: 4%;
+
+        width: 92%;
+
+        padding: 20px;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        background: rgba(7,17,31,.95);
+
+        border:
+            1px solid rgba(255,255,255,.1);
+
+        border-radius: 18px;
+
+        backdrop-filter: blur(20px);
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .cards,
+    .wire-layout,
+    .media-grid,
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -2.5px;
+    }
+
+    .profile-card {
+        align-items: flex-start;
+    }
+
+}
+
+
+@media(max-width:480px) {
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        text-align: center;
+    }
+
+    .hero-stats {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+        gap: 15px;
+    }
+
+    .hero-stats strong {
+        font-size: 19px;
+    }
+
+    .hero-stats span {
+        font-size: 9px;
+    }
+
+    .wire-card {
+        padding: 18px;
+    }
+
+    .wire-row {
+        grid-template-columns:
+            25px 1fr;
+    }
+
+    .wire-row strong {
+        grid-column: 2;
+    }
+
+    .wire {
+        grid-column: 2;
+    }
+
+    .profile-card {
+        flex-direction: column;
+    }
+
+    .profile-photo {
+        width: 100%;
+        height: 230px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="#home" class="logo">
+
+            <span class="logo-icon">⌁</span>
+
+            UTP<span class="accent">LAB</span>
+
+        </a>
+
+
+        <button class="menu-toggle" id="menuToggle">
+            ☰
+        </button>
+
+
+        <nav id="navMenu">
+
+            <a href="#home">Home</a>
+
+            <a href="#materi">Materi</a>
+
+            <a href="#warna">Warna Kabel</a>
+
+            <a href="#tutorial">Tutorial</a>
+
+            <a href="#media">Media</a>
+
+            <a href="#profil">Profil</a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="section hero" id="home">
+
+
+    <div>
+
+        <div class="badge">
+
+            <span class="pulse"></span>
+
+            COMPUTER NETWORKING
+
+        </div>
+
+
+        <h1>
+
+            Mengenal & Merangkai
+
+            <span>Kabel UTP</span>
+
+        </h1>
+
+
+        <p>
+
+            Pelajari dasar kabel UTP, fungsi RJ45,
+            urutan warna, proses crimping hingga
+            pengujian menggunakan LAN Tester
+            dalam satu website pembelajaran.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="#materi" class="btn primary">
+                Mulai Belajar →
+            </a>
+
+            <a href="#media" class="btn secondary">
+                Lihat Media
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>01</strong>
+                <span>Materi UTP</span>
+            </div>
+
+            <div>
+                <strong>02</strong>
+                <span>Standar Kabel</span>
+            </div>
+
+            <div>
+                <strong>03</strong>
+                <span>Praktik</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="glass hero-card">
+
+        <div class="network">
+
+            <div class="network-center">
+
+                <strong>UTP</strong>
+
+                <small>NETWORK</small>
+
+            </div>
+
+
+            <div class="node node1">
+                RJ45
+            </div>
+
+            <div class="node node2">
+                LAN
+            </div>
+
+            <div class="node node3">
+                PC
+            </div>
+
+
+            <div class="line line1"></div>
+
+            <div class="line line2"></div>
+
+            <div class="line line3"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MATERI
+===================================================== -->
+
+<section class="section" id="materi">
+
+
+    <div class="section-heading">
+
+        <span>01 — DASAR</span>
+
+        <h2>Apa itu Kabel UTP?</h2>
+
+        <p>
+            Kenali komponen utama yang digunakan
+            dalam instalasi jaringan komputer.
+        </p>
+
+    </div>
+
+
+
+    <div class="cards">
+
+
+        <article class="glass info-card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <div class="icon">
+                🔌
+            </div>
+
+            <h3>
+                Kabel UTP
+            </h3>
+
+            <p>
+                UTP atau Unshielded Twisted Pair
+                adalah kabel jaringan yang terdiri
+                dari pasangan kabel tembaga yang
+                dipilin untuk mengurangi gangguan
+                sinyal.
+            </p>
+
+        </article>
+
+
+
+        <article class="glass info-card">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <div class="icon">
+                🔗
+            </div>
+
+            <h3>
+                RJ45
+            </h3>
+
+            <p>
+                RJ45 merupakan konektor yang
+                dipasang pada ujung kabel Ethernet
+                sehingga kabel dapat terhubung
+                dengan perangkat jaringan.
+            </p>
+
+        </article>
+
+
+
+        <article class="glass info-card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <div class="icon">
+                🛠️
+            </div>
+
+            <h3>
+                Tang Crimping
+            </h3>
+
+            <p>
+                Digunakan untuk memasang dan
+                mengunci kabel UTP pada konektor
+                RJ45.
+            </p>
+
+        </article>
+
+
+
+        <article class="glass info-card">
+
+            <div class="card-number">
+                04
+            </div>
+
+            <div class="icon">
+                ✓
+            </div>
+
+            <h3>
+                LAN Tester
+            </h3>
+
+            <p>
+                Digunakan untuk memeriksa apakah
+                susunan kabel dan koneksi RJ45
+                sudah benar.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WARNA
+===================================================== -->
+
+<section class="section" id="warna">
+
+
+    <div class="section-heading">
+
+        <span>02 — STANDAR WARNA</span>
+
+        <h2>Urutan Warna Kabel UTP</h2>
+
+        <p>
+            Susunan warna harus tepat agar kabel
+            dapat bekerja sesuai standar jaringan.
+        </p>
+
+    </div>
+
+
+
+    <div class="wire-layout">
+
+
+        <!-- T568B -->
+
+        <div class="glass wire-card">
+
+            <div class="wire-header">
+
+                <div>
+
+                    <span>
+                        STANDARD
+                    </span>
+
+                    <h3>
+                        T568B
+                    </h3>
+
+                </div>
+
+                <div class="tag">
+                    POPULER
+                </div>
+
+            </div>
+
+
+            <div class="wire-list">
+
+
+                <div class="wire-row">
+                    <b>1</b>
+                    <span class="wire orange-white"></span>
+                    <strong>Putih Orange</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>2</b>
+                    <span class="wire orange"></span>
+                    <strong>Orange</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>3</b>
+                    <span class="wire green-white"></span>
+                    <strong>Putih Hijau</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>4</b>
+                    <span class="wire blue"></span>
+                    <strong>Biru</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>5</b>
+                    <span class="wire blue-white"></span>
+                    <strong>Putih Biru</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>6</b>
+                    <span class="wire green"></span>
+                    <strong>Hijau</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>7</b>
+                    <span class="wire brown-white"></span>
+                    <strong>Putih Coklat</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>8</b>
+                    <span class="wire brown"></span>
+                    <strong>Coklat</strong>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- T568A -->
+
+        <div class="glass wire-card">
+
+            <div class="wire-header">
+
+                <div>
+
+                    <span>
+                        STANDARD
+                    </span>
+
+                    <h3>
+                        T568A
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="wire-list">
+
+
+                <div class="wire-row">
+                    <b>1</b>
+                    <span class="wire green-white"></span>
+                    <strong>Putih Hijau</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>2</b>
+                    <span class="wire green"></span>
+                    <strong>Hijau</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>3</b>
+                    <span class="wire orange-white"></span>
+                    <strong>Putih Orange</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>4</b>
+                    <span class="wire blue"></span>
+                    <strong>Biru</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>5</b>
+                    <span class="wire blue-white"></span>
+                    <strong>Putih Biru</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>6</b>
+                    <span class="wire orange"></span>
+                    <strong>Orange</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>7</b>
+                    <span class="wire brown-white"></span>
+                    <strong>Putih Coklat</strong>
+                </div>
+
+                <div class="wire-row">
+                    <b>8</b>
+                    <span class="wire brown"></span>
+                    <strong>Coklat</strong>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="glass tip">
+
+        <div class="tip-icon">
+            💡
+        </div>
+
+        <div>
+
+            <strong>
+                Tips praktik
+            </strong>
+
+            <p>
+                Kabel straight-through menggunakan
+                standar yang sama pada kedua ujung,
+                misalnya T568B–T568B. Kabel crossover
+                menggunakan standar berbeda pada
+                kedua ujungnya.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TUTORIAL
+===================================================== -->
+
+<section class="section" id="tutorial">
+
+
+    <div class="section-heading">
+
+        <span>03 — PRAKTIK</span>
+
+        <h2>Cara Merangkai Kabel UTP</h2>
+
+        <p>
+            Ikuti langkah berikut secara berurutan
+            untuk membuat kabel jaringan.
+        </p>
+
+    </div>
+
+
+
+    <div class="timeline">
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                01
+            </div>
+
+            <div>
+
+                <h3>
+                    Siapkan alat dan bahan
+                </h3>
+
+                <p>
+                    Siapkan kabel UTP, konektor RJ45,
+                    tang crimping dan LAN Tester.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                02
+            </div>
+
+            <div>
+
+                <h3>
+                    Kupas kabel UTP
+                </h3>
+
+                <p>
+                    Kupas bagian luar kabel secukupnya
+                    kemudian pisahkan pasangan kabel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                03
+            </div>
+
+            <div>
+
+                <h3>
+                    Susun warna kabel
+                </h3>
+
+                <p>
+                    Luruskan kabel dan susun sesuai
+                    standar T568A atau T568B.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                04
+            </div>
+
+            <div>
+
+                <h3>
+                    Masukkan ke RJ45
+                </h3>
+
+                <p>
+                    Potong ujung kabel secara rata
+                    kemudian masukkan ke konektor RJ45.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                05
+            </div>
+
+            <div>
+
+                <h3>
+                    Crimping
+                </h3>
+
+                <p>
+                    Masukkan RJ45 ke tang crimping
+                    lalu tekan dengan kuat dan merata.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="glass timeline-item">
+
+            <div class="step">
+                06
+            </div>
+
+            <div>
+
+                <h3>
+                    Uji LAN Tester
+                </h3>
+
+                <p>
+                    Hubungkan kedua ujung kabel ke
+                    LAN Tester dan pastikan indikator
+                    menyala sesuai urutan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MEDIA
+===================================================== -->
+
+<section class="section" id="media">
+
+
+    <div class="section-heading">
+
+        <span>04 — MEDIA PEMBELAJARAN</span>
+
+        <h2>PPT & Video Pembelajaran</h2>
+
+        <p>
+            Download materi dan akses video
+            pembelajaran jaringan komputer.
+        </p>
+
+    </div>
+
+
+
+    <div class="media-grid">
+
+
+        <!-- PPT -->
+
+        <div class="glass media-card">
+
+            <div class="media-icon ppt">
+                PPT
+            </div>
+
+            <div class="media-content">
+
+                <span>DOKUMEN</span>
+
+                <h3>
+                    Materi Kabel UTP
+                </h3>
+
+                <p>
+                    Presentasi mengenai kabel UTP,
+                    RJ45, crimping dan jaringan komputer.
+                </p>
+
+
+                <!--
+                    GANTI LINK FILE PPT DI SINI
+                -->
+
+                <a
+                    href="PPT/materi-utm.pptx"
+                    class="media-button"
+                    download
+                >
+                    Download PPT →
+                </a>
+
+
+                <!--
+                    GANTI FILE PDF DI SINI
+                -->
+
+                <a
+                    href="PPT/materi-utm.pdf"
+                    class="preview"
+                    target="_blank"
+                >
+                    Preview PDF
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="glass media-card">
+
+            <div class="media-icon video">
+                ▶
+            </div>
+
+            <div class="media-content">
+
+                <span>VIDEO 01</span>
+
+                <h3>
+                    Merangkai Kabel UTP
+                </h3>
+
+                <p>
+                    Tutorial menyusun warna kabel
+                    dan memasang konektor RJ45.
+                </p>
+
+
+                <!--
+                    GANTI VIDEO DI SINI
+                -->
+
+                <a
+                    href="video/tutorial-utp.mp4"
+                    class="media-button"
+                    target="_blank"
+                >
+                    Tonton Video →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="glass media-card">
+
+            <div class="media-icon video">
+                ▶
+            </div>
+
+            <div class="media-content">
+
+                <span>VIDEO 02</span>
+
+                <h3>
+                    Testing Kabel LAN
+                </h3>
+
+                <p>
+                    Tutorial pengujian kabel menggunakan
+                    LAN Tester.
+                </p>
+
+
+                <!--
+                    GANTI VIDEO DI SINI
+                -->
+
+                <a
+                    href="video/testing-lan.mp4"
+                    class="media-button"
+                    target="_blank"
+                >
+                    Tonton Video →
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="glass upload-info">
+
+        📁
+
+        Simpan file PPT di folder
+        <b>PPT</b> dan video di folder
+        <b>video</b>.
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFIL
+===================================================== -->
+
+<section class="section" id="profil">
+
+
+    <div class="section-heading">
+
+        <span>05 — PROFIL</span>
+
+        <h2>Profil Pembelajaran</h2>
+
+        <p>
+            Informasi mahasiswa dan dosen pengampu.
+        </p>
+
+    </div>
+
+
+
+    <div class="profile-grid">
+
+
+        <!-- MAHASISWA -->
+
+        <div class="glass profile-card">
+
+
+            <!--
+                GANTI FOTO MAHASISWA
+
+                image/mahasiswa.jpg
+            -->
+
+            <img
+                src="image/mahasiswa.jpg"
+                alt="Foto Mahasiswa"
+                class="profile-photo"
+                onerror="
+                    this.src='https://via.placeholder.com/300x300?text=Mahasiswa'
+                "
+            >
+
+
+            <div class="profile-info">
+
+                <span>
+                    MAHASISWA
+                </span>
+
+                <h3>
+                    Nama Mahasiswa
+                </h3>
+
+                <p>
+                    <b>NIM:</b>
+                    000000000
+                </p>
+
+                <p>
+                    <b>Kelas:</b>
+                    1-TIA
+                </p>
+
+                <p>
+                    <b>Program Studi:</b>
+                    Teknologi Informasi
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DOSEN -->
+
+        <div class="glass profile-card">
+
+
+            <!--
+                GANTI FOTO DOSEN
+
+                image/dosen.jpg
+            -->
+
+            <img
+                src="image/dosen.jpg"
+                alt="Foto Dosen"
+                class="profile-photo"
+                onerror="
+                    this.src='https://via.placeholder.com/300x300?text=Dosen'
+                "
+            >
+
+
+            <div class="profile-info">
+
+                <span>
+                    DOSEN PENGAMPU
+                </span>
+
+                <h3>
+                    Nama Dosen Pengampu
+                </h3>
+
+                <p>
+                    Mata Kuliah:
+                    <b>Jaringan Komputer</b>
+                </p>
+
+                <p>
+                    Materi:
+                    Kabel UTP & LAN
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    ⌁
+                </span>
+
+                UTP<span class="accent">
+                    LAB
+                </span>
+
+            </div>
+
+            <p>
+                Media pembelajaran jaringan komputer
+                berbasis website.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#materi">
+                Materi
+            </a>
+
+            <a href="#warna">
+                Warna
+            </a>
+
+            <a href="#media">
+                Media
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © <span id="year"></span>
+        UTP LAB — Computer Networking
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const navMenu =
+    document.getElementById("navMenu");
+
+
+menuToggle.addEventListener("click", () => {
+
+    navMenu.classList.toggle("active");
+
+    menuToggle.textContent =
+        navMenu.classList.contains("active")
+        ? "✕"
+        : "☰";
+
+});
+
+
+/* =====================================================
+   CLOSE MOBILE MENU
+===================================================== */
+
+document.querySelectorAll("#navMenu a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMenu.classList.remove("active");
+
+        menuToggle.textContent = "☰";
+
+    });
+
+});
+
+
+/* =====================================================
+   YEAR
+===================================================== */
+
+document.getElementById("year")
+.textContent = new Date().getFullYear();
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const elements =
+    document.querySelectorAll(
+        ".info-card, .wire-card, .timeline-item, .media-card, .profile-card"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("show");
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.08
+        }
+    );
+
+
+elements.forEach(element => {
+
+    element.classList.add("reveal");
+
+    observer.observe(element);
+
+});
+
+
+/* =====================================================
+   ACTIVE NAV
+===================================================== */
+
+const sections =
+    document.querySelectorAll("section[id]");
+
+const links =
+    document.querySelectorAll("nav a");
+
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const top =
+            section.offsetTop - 160;
+
+        if (window.scrollY >= top) {
+
+            current =
+                section.getAttribute("id");
+
+        }
+
+    });
+
+
+    links.forEach(link => {
+
+        link.style.color = "";
+
+        if (
+            link.getAttribute("href")
+            === `#${current}`
+        ) {
+
+            link.style.color =
+                "#36a9ff";
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
